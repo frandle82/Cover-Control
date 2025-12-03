@@ -5,7 +5,7 @@ guided configuration flow and adding per-cover controllers that react to sensor 
 
 ## Features
 - **Guided setup & options**: Configure covers, schedules, brightness and sun elevation thresholds, window/door contacts, ventilation lockout, and shading preferences via the built-in config and options flows.
-- - **Per-cover runtime control**: A controller monitors time windows and sensor state to open, close, shade, tilt, or stop automation when conditions (brightness, sun, occupancy, ventilation, vacation overrides) are not met.
+- **Per-cover runtime control**: A controller monitors time windows and sensor state to open, close, shade, tilt, or stop automation when conditions (brightness, sun, occupancy, ventilation, vacation overrides) are not met.
 - **Condition overrides**: Optional binary sensors can gate opening, closing, ventilation start/stop, shading in/out, and
   shading tilt so you can temporarily disable or force specific behaviors.
 - **Service hooks**: Trigger immediate shading or pause automation for a cover for a set duration through Home Assistant
