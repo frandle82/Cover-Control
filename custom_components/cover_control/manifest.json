@@ -1,0 +1,10 @@
+{
+  "domain": "Cover_Control",
+  "name": "Cover Control",
+  "version": "0.1.0",
+  "requirements": [],
+  "codeowners": ["@frandle82"],
+  "config_flow": true,
+  "after_dependencies": ["sun"],
+  "iot_class": "local_polling"
+}
