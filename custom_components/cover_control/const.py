@@ -1,0 +1,202 @@
+"""Constants for Cover Control integration."""
+from __future__ import annotations
+
+from homeassistant.const import Platform
+
+DOMAIN = "shuttercontrol"
+CONF_NAME = "name"
+DEFAULT_NAME = "Cover Control"
+PLATFORMS: list[Platform] = [Platform.SWITCH]
+
+CONF_COVERS = "covers"
+CONF_OPEN_POSITION = "open_position"
+CONF_CLOSE_POSITION = "close_position"
+CONF_VENTILATE_POSITION = "ventilate_position"
+CONF_SHADING_POSITION = "shading_position"
+CONF_POSITION_TOLERANCE = "position_tolerance"
+CONF_TIME_UP_EARLY_WORKDAY = "time_up_early_workday"
+CONF_TIME_UP_LATE_WORKDAY = "time_up_late_workday"
+CONF_TIME_UP_EARLY_NON_WORKDAY = "time_up_early_non_workday"
+CONF_TIME_UP_LATE_NON_WORKDAY = "time_up_late_non_workday"
+CONF_TIME_DOWN_EARLY_WORKDAY = "time_down_early_workday"
+CONF_TIME_DOWN_LATE_WORKDAY = "time_down_late_workday"
+CONF_TIME_DOWN_EARLY_NON_WORKDAY = "time_down_early_non_workday"
+CONF_TIME_DOWN_LATE_NON_WORKDAY = "time_down_late_non_workday"
+
+CONF_WORKDAY_SENSOR = "workday_sensor"
+CONF_BRIGHTNESS_SENSOR = "brightness_sensor"
+CONF_BRIGHTNESS_OPEN_ABOVE = "brightness_open_above"
+CONF_BRIGHTNESS_CLOSE_BELOW = "brightness_close_below"
+
+CONF_SUN_ELEVATION_OPEN = "sun_elevation_open"
+CONF_SUN_ELEVATION_CLOSE = "sun_elevation_close"
+CONF_SUN_AZIMUTH_START = "shading_azimuth_start"
+CONF_SUN_AZIMUTH_END = "shading_azimuth_end"
+CONF_SUN_ELEVATION_MIN = "shading_elevation_min"
+CONF_SUN_ELEVATION_MAX = "shading_elevation_max"
+CONF_SHADING_BRIGHTNESS_START = "shading_brightness_start"
+CONF_SHADING_BRIGHTNESS_END = "shading_brightness_end"
+DEFAULT_SHADING_FORECAST_TYPE = "weather_attributes"
+CONF_SHADING_FORECAST_SENSOR = "shading_forecast_sensor"
+CONF_SHADING_FORECAST_TYPE = "shading_forecast_type"
+CONF_SHADING_WEATHER_CONDITIONS = "shading_weather_conditions"
+
+CONF_TEMPERATURE_SENSOR_INDOOR = "temperature_sensor_indoor"
+CONF_TEMPERATURE_SENSOR_OUTDOOR = "temperature_sensor_outdoor"
+CONF_TEMPERATURE_THRESHOLD = "temperature_threshold"
+CONF_TEMPERATURE_FORECAST_THRESHOLD = "temperature_forecast_threshold"
+
+CONF_RESIDENT_SENSOR = "resident_sensor"
+CONF_WINDOW_SENSORS = "window_sensors"
+CONF_WINDOW_SENSOR_FULL = "window_sensor_full_open"
+CONF_WINDOW_SENSOR_TILT = "window_sensor_tilt"
+
+CONF_ADDITIONAL_CONDITION_OPEN = "additional_condition_open"
+CONF_ADDITIONAL_CONDITION_CLOSE = "additional_condition_close"
+CONF_ADDITIONAL_CONDITION_VENTILATE = "additional_condition_ventilate"
+CONF_ADDITIONAL_CONDITION_VENTILATE_END = "additional_condition_ventilate_end"
+CONF_ADDITIONAL_CONDITION_SHADING = "additional_condition_shading"
+CONF_ADDITIONAL_CONDITION_SHADING_TILT = "additional_condition_shading_tilt"
+CONF_ADDITIONAL_CONDITION_SHADING_END = "additional_condition_shading_end"
+
+CONF_MASTER_ENABLED = "master_enabled"
+
+CONF_LOCKOUT_TILT_CLOSE = "lockout_tilt_close"
+CONF_LOCKOUT_TILT_SHADING_START = "lockout_tilt_shading_start"
+CONF_LOCKOUT_TILT_SHADING_END = "lockout_tilt_shading_end"
+
+CONF_VENTILATION_DELAY_AFTER_CLOSE = "ventilation_delay_after_close"
+CONF_VENTILATION_ALLOW_HIGHER_POSITION = "ventilation_allow_higher_position"
+CONF_VENTILATION_USE_AFTER_SHADING = "ventilation_use_after_shading"
+
+CONF_CONTACT_TRIGGER_DELAY = "contact_trigger_delay"
+CONF_CONTACT_STATUS_DELAY = "contact_status_delay"
+
+CONF_AUTO_UP = "auto_up_enabled"
+CONF_AUTO_UP_ENTITY = "auto_up_entity"
+CONF_AUTO_DOWN = "auto_down_enabled"
+CONF_AUTO_DOWN_ENTITY = "auto_down_entity"
+CONF_AUTO_BRIGHTNESS = "auto_brightness_enabled"
+CONF_AUTO_BRIGHTNESS_ENTITY = "auto_brightness_entity"
+CONF_AUTO_SUN = "auto_sun_enabled"
+CONF_AUTO_SUN_ENTITY = "auto_sun_entity"
+CONF_AUTO_VENTILATE = "auto_ventilate_enabled"
+CONF_AUTO_VENTILATE_ENTITY = "auto_ventilate_entity"
+CONF_AUTO_SHADING = "auto_shading_enabled"
+CONF_AUTO_SHADING_ENTITY = "auto_shading_entity"
+CONF_EXPOSE_SWITCH_SETTINGS = "expose_switch_settings"
+
+DEFAULT_AUTOMATION_FLAGS: dict[str, bool] = {
+    CONF_AUTO_UP: True,
+    CONF_AUTO_DOWN: True,
+    CONF_AUTO_BRIGHTNESS: True,
+    CONF_AUTO_SUN: True,
+    CONF_AUTO_VENTILATE: True,
+    CONF_AUTO_SHADING: True,
+}
+
+DEFAULT_MASTER_FLAGS: dict[str, bool] = {CONF_MASTER_ENABLED: True}
+
+CONF_COLD_PROTECTION_THRESHOLD = "cold_protection_temperature"
+CONF_COLD_PROTECTION_FORECAST_SENSOR = "cold_protection_forecast_sensor"
+
+CONF_MANUAL_OVERRIDE_MINUTES = "manual_override_minutes"
+CONF_MANUAL_OVERRIDE_BLOCK_OPEN = "manual_override_block_open"
+CONF_MANUAL_OVERRIDE_BLOCK_CLOSE = "manual_override_block_close"
+CONF_MANUAL_OVERRIDE_BLOCK_VENTILATE = "manual_override_block_ventilate"
+CONF_MANUAL_OVERRIDE_BLOCK_SHADING = "manual_override_block_shading"
+CONF_MANUAL_OVERRIDE_RESET_MODE = "manual_override_reset_mode"
+CONF_MANUAL_OVERRIDE_RESET_TIME = "manual_override_reset_time"
+CONF_FULL_OPEN_POSITION = "full_open_position"
+
+MANUAL_OVERRIDE_RESET_NONE = "none"
+MANUAL_OVERRIDE_RESET_TIME = "time"
+MANUAL_OVERRIDE_RESET_TIMEOUT = "timeout"
+
+SIGNAL_STATE_UPDATED = "shuttercontrol_state_updated"
+
+REASON_LABELS = {
+    "manual_override": "override",
+    "manual_shading": "shading man",
+    "shading": "shading on",
+    "shading_end_close": "shading start",
+    "shading_end_open": "shading end",
+    "sun_close": "close (sun)",
+    "sun_open": "open (sun)",
+    "scheduled_close": "close (time)",
+    "scheduled_open": "open (time)",
+    "ventilation": "ventilation",
+    "resident_asleep": "resident",
+    "idle": "idle",
+}
+
+DEFAULT_OPEN_POSITION = 100
+DEFAULT_CLOSE_POSITION = 0
+DEFAULT_VENTILATE_POSITION = 50
+DEFAULT_SHADING_POSITION = 30
+DEFAULT_TOLERANCE = 3
+
+DEFAULT_BRIGHTNESS_OPEN = 500
+DEFAULT_BRIGHTNESS_CLOSE = 100
+DEFAULT_SUN_ELEVATION_OPEN = -2.0
+DEFAULT_SUN_ELEVATION_CLOSE = -4.0
+DEFAULT_SHADING_AZIMUTH_START = 90
+DEFAULT_SHADING_AZIMUTH_END = 270
+DEFAULT_SHADING_ELEVATION_MIN = 10
+DEFAULT_SHADING_ELEVATION_MAX = 70
+DEFAULT_SHADING_BRIGHTNESS_START = 20000
+DEFAULT_SHADING_BRIGHTNESS_END = 15000
+DEFAULT_TEMPERATURE_THRESHOLD = 26.0
+DEFAULT_TEMPERATURE_FORECAST_THRESHOLD = 27.0
+DEFAULT_COLD_PROTECTION_THRESHOLD = 5.0
+DEFAULT_CONTACT_TRIGGER_DELAY = 0
+DEFAULT_CONTACT_STATUS_DELAY = 0
+DEFAULT_MANUAL_OVERRIDE_MINUTES = 90
+DEFAULT_MANUAL_OVERRIDE_RESET_TIME = "00:00:00"
+DEFAULT_MANUAL_OVERRIDE_FLAGS: dict[str, bool] = {
+    CONF_MANUAL_OVERRIDE_BLOCK_OPEN: True,
+    CONF_MANUAL_OVERRIDE_BLOCK_CLOSE: True,
+    CONF_MANUAL_OVERRIDE_BLOCK_VENTILATE: True,
+    CONF_MANUAL_OVERRIDE_BLOCK_SHADING: True,
+}
+
+DEFAULT_TIME_UP_EARLY_WORKDAY = "06:00:00"
+DEFAULT_TIME_UP_EARLY_NON_WORKDAY = "07:00:00"
+DEFAULT_TIME_UP_LATE_WORKDAY = "09:00:00"
+DEFAULT_TIME_UP_LATE_NON_WORKDAY = "09:00:00"
+DEFAULT_TIME_DOWN_EARLY_WORKDAY = "16:00:00"
+DEFAULT_TIME_DOWN_EARLY_NON_WORKDAY = "16:00:00"
+DEFAULT_TIME_DOWN_LATE_WORKDAY = "22:00:00"
+DEFAULT_TIME_DOWN_LATE_NON_WORKDAY = "22:00:00"
+
+DEFAULT_VENTILATION_DELAY_AFTER_CLOSE = 0
+
+DEFAULT_POSITION_SETTINGS: dict[str, float] = {
+    CONF_OPEN_POSITION: DEFAULT_OPEN_POSITION,
+    CONF_CLOSE_POSITION: DEFAULT_CLOSE_POSITION,
+    CONF_VENTILATE_POSITION: DEFAULT_VENTILATE_POSITION,
+    CONF_SHADING_POSITION: DEFAULT_SHADING_POSITION,
+    CONF_POSITION_TOLERANCE: DEFAULT_TOLERANCE,
+}
+
+DEFAULT_CONTACT_SETTINGS: dict[str, int | float | bool] = {
+    CONF_CONTACT_TRIGGER_DELAY: DEFAULT_CONTACT_TRIGGER_DELAY,
+    CONF_CONTACT_STATUS_DELAY: DEFAULT_CONTACT_STATUS_DELAY,
+    CONF_VENTILATION_DELAY_AFTER_CLOSE: DEFAULT_VENTILATION_DELAY_AFTER_CLOSE,
+    CONF_VENTILATION_ALLOW_HIGHER_POSITION: False,
+    CONF_VENTILATION_USE_AFTER_SHADING: False,
+    CONF_LOCKOUT_TILT_CLOSE: False,
+    CONF_LOCKOUT_TILT_SHADING_START: False,
+    CONF_LOCKOUT_TILT_SHADING_END: False,
+}
+
+DEFAULT_TIME_SETTINGS: dict[str, str] = {
+    CONF_TIME_UP_EARLY_WORKDAY: DEFAULT_TIME_UP_EARLY_WORKDAY,
+    CONF_TIME_UP_EARLY_NON_WORKDAY: DEFAULT_TIME_UP_EARLY_NON_WORKDAY,
+    CONF_TIME_UP_LATE_WORKDAY: DEFAULT_TIME_UP_LATE_WORKDAY,
+    CONF_TIME_UP_LATE_NON_WORKDAY: DEFAULT_TIME_UP_LATE_NON_WORKDAY,
+    CONF_TIME_DOWN_EARLY_WORKDAY: DEFAULT_TIME_DOWN_EARLY_WORKDAY,
+    CONF_TIME_DOWN_EARLY_NON_WORKDAY: DEFAULT_TIME_DOWN_EARLY_NON_WORKDAY,
+    CONF_TIME_DOWN_LATE_WORKDAY: DEFAULT_TIME_DOWN_LATE_WORKDAY,
+    CONF_TIME_DOWN_LATE_NON_WORKDAY: DEFAULT_TIME_DOWN_LATE_NON_WORKDAY,
+}
