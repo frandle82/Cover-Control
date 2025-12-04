@@ -601,11 +601,11 @@ class ShutterOptionsFlow(config_entries.OptionsFlow):
         """Return a safe default for optional selectors."""
 
         if key not in self._options:
-            return None
+            return vol.UNDEFINED
         
         value = self._options.get(key)
         if value in (None, "", vol.UNDEFINED):
-            return None
+            return vol.UNDEFINED
         return value
 
 
