@@ -83,8 +83,10 @@ from .const import (
     DEFAULT_TEMPERATURE_THRESHOLD,
     DEFAULT_TEMPERATURE_FORECAST_THRESHOLD,
     DEFAULT_COLD_PROTECTION_THRESHOLD,
+    REASON_LABELS,
     DOMAIN,
 )
+from .controller import ControllerManager
 
 
 AUTOMATION_TOGGLES: tuple[tuple[str, str], ...] = (
@@ -106,7 +108,6 @@ TOGGLE_ICONS: dict[str, str] = {
 }
 
 DEFAULT_LOOKUP = {
-    CONF_BRIGHTNESS_SENSOR: None,
     CONF_BRIGHTNESS_OPEN_ABOVE: DEFAULT_BRIGHTNESS_OPEN,
     CONF_BRIGHTNESS_CLOSE_BELOW: DEFAULT_BRIGHTNESS_CLOSE,
     CONF_VENTILATE_POSITION: DEFAULT_VENTILATE_POSITION,
@@ -257,14 +258,22 @@ class MasterControlSwitch(SwitchEntity):
 
     @property
     def extra_state_attributes(self):
-        settings = self._settings_attributes()
-        if settings:
-            return {"settings": settings}
-        return None
-
-    def _settings_attributes(self) -> dict[str, object] | None:
         if not self.entry.options.get(CONF_EXPOSE_SWITCH_SETTINGS):
             return None
+
+        attributes: dict[str, object] = {}
+
+        settings = self._settings_attributes()
+        if settings:
+            attributes["settings"] = settings
+
+        reasons = self._reason_attributes()
+        if reasons:
+            attributes["reason"] = reasons
+
+        return attributes or None
+
+    def _settings_attributes(self) -> dict[str, object] | None:
         config = {**self.entry.data, **self.entry.options}
         settings: dict[str, object] = {}
         for key, default in MASTER_DEFAULT_LOOKUP.items():
@@ -277,6 +286,21 @@ class MasterControlSwitch(SwitchEntity):
                 continue
             settings[key] = value
         return settings or None
+
+    def _reason_attributes(self) -> dict[str, str] | None:
+        manager = self.hass.data.get(DOMAIN, {}).get(self.entry.entry_id)
+        if not isinstance(manager, ControllerManager):
+            return None
+
+        reasons: dict[str, str] = {}
+        for cover in manager.controllers:
+            snapshot = manager.state_snapshot(cover)
+            if not snapshot:
+                continue
+            _, reason, *_ = snapshot
+            if reason:
+                reasons[cover] = REASON_LABELS.get(reason, reason)
+        return reasons or None
 
     async def async_turn_on(self, **kwargs) -> None:  # type: ignore[override]
         options = {**self.entry.options, CONF_MASTER_ENABLED: True}
