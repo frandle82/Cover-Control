@@ -588,7 +588,7 @@ class ShutterOptionsFlow(config_entries.OptionsFlow):
                 if key in self._CLEARABLE_OPTION_KEYS:
                     cleaned[key] = None
                 continue
-            cleaned[key] = value
+            cleaned[key] = _json_safe(value)
         
         for key in self._CLEARABLE_OPTION_KEYS:
             # If the UI omits a clearable selector entirely (e.g. after manual removal),
