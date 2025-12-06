@@ -258,18 +258,20 @@ class MasterControlSwitch(SwitchEntity):
 
     @property
     def extra_state_attributes(self):
-        if not self.entry.options.get(CONF_EXPOSE_SWITCH_SETTINGS):
-            return None
-
         attributes: dict[str, object] = {}
 
-        settings = self._settings_attributes()
-        if settings:
-            attributes["settings"] = settings
+        if self.entry.options.get(CONF_EXPOSE_SWITCH_SETTINGS):
+            settings = self._settings_attributes()
+            if settings:
+                attributes["settings"] = settings
 
         reasons = self._reason_attributes()
         if reasons:
             attributes["reason"] = reasons
+
+        manual = self._manual_override_attributes()
+        if manual:
+            attributes["manual_override"] = manual
 
         return attributes or None
 
@@ -301,6 +303,28 @@ class MasterControlSwitch(SwitchEntity):
             if reason:
                 reasons[cover] = REASON_LABELS.get(reason, reason)
         return reasons or None
+
+    def _manual_override_attributes(self) -> dict[str, object] | None:
+        manager = self.hass.data.get(DOMAIN, {}).get(self.entry.entry_id)
+        if not isinstance(manager, ControllerManager):
+            return None
+
+        manual: dict[str, object] = {}
+        for cover in manager.controllers:
+            snapshot = manager.state_snapshot(cover)
+            if not snapshot:
+                continue
+            _, reason, until, active, *_ = snapshot
+            if not active:
+                continue
+            cover_state: dict[str, object] = {"active": True}
+            if until:
+                cover_state["until"] = until
+            if reason:
+                cover_state["reason"] = REASON_LABELS.get(reason, reason)
+            manual[cover] = cover_state
+
+        return manual or None
 
     async def async_turn_on(self, **kwargs) -> None:  # type: ignore[override]
         options = {**self.entry.options, CONF_MASTER_ENABLED: True}
